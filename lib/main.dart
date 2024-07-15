@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/presentation/providers/task_provider.dart';
-
-import 'package:task_management_app/presentation/screens/home_screen.dart';
+import 'package:task_management_app/presentation/widgets/tapbar_widget.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: "assets/.env");
@@ -23,6 +22,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
         ),
-        home: const MyHomeScreen());
+        home: const MyTapBar());
   }
 }

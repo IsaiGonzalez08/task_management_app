@@ -38,6 +38,7 @@ dependencies:
   http: ^1.2.1
   flutter_dotenv: ^5.1.0
   provider: ^6.1.2
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +58,10 @@ dev_dependencies:
 flutter:
   assets:
     - assets/img/Task.png
+    - assets/img/home.svg
+    - assets/img/active_home.svg
+    - assets/img/add.png
+    - assets/img/active_add.png
     - assets/.env
 
   # The following line ensures that the Material Icons font is

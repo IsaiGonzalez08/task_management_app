@@ -16,12 +16,13 @@ class MyHomeScreen extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.08,
-              vertical: MediaQuery.of(context).size.width * 0.14,
-            ),
+                horizontal: MediaQuery.of(context).size.width * 0.08),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 50,
+                ),
                 Text(
                   'Bienvenido',
                   style: TextStyle(
