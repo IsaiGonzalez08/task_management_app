@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/presentation/providers/task_provider.dart';
+import 'package:task_management_app/presentation/screens/update_task_screen.dart';
 import 'package:task_management_app/presentation/widgets/button_widget.dart';
 import 'package:task_management_app/presentation/widgets/tapbar_widget.dart';
 
@@ -38,6 +39,15 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
   void deleteTask() async {
     await Provider.of<TaskProvider>(context, listen: false).deleteTask(taskId);
     navigateTapBar();
+  }
+
+  void navigateUpdateTaskScreen(int taskId) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MyUpdateTaskScreen(
+                  taskId: taskId,
+                )));
   }
 
   @override
@@ -88,7 +98,9 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      navigateUpdateTaskScreen(taskId);
+                    },
                     color: const Color(0xFFFFFFFF),
                     style: const ButtonStyle(
                         shape: WidgetStatePropertyAll(ContinuousRectangleBorder(

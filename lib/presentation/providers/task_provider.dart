@@ -52,4 +52,10 @@ class TaskProvider extends ChangeNotifier {
   Future<void> deleteTask(int id) async {
     await _taskRepository.deleteTask(id);
   }
+
+  Future<void> updateTask(int id, String title, int isComplete, String date,
+      String comments, String description, String tags) async {
+    await _taskRepository.updateTask(
+        id, title, isComplete, date, comments, description, tags);
+  }
 }

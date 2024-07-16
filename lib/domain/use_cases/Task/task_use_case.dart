@@ -6,8 +6,8 @@ class GetAllTasksUseCase {
   GetAllTasksUseCase(this._taskRepository);
 
   Future<List<TaskModel>> getAllTasks() async {
-     return await _taskRepository.getAllTasks();
-  } 
+    return await _taskRepository.getAllTasks();
+  }
 }
 
 class GetTaskByIdUseCase {
@@ -15,8 +15,8 @@ class GetTaskByIdUseCase {
   GetTaskByIdUseCase(this._taskRepository);
 
   Future<TaskModel> getTaskById(int id) async {
-     return await _taskRepository.getTaskById(id);
-  } 
+    return await _taskRepository.getTaskById(id);
+  }
 }
 
 class CreateTaskUseCase {
@@ -25,8 +25,9 @@ class CreateTaskUseCase {
 
   Future<void> createTask(String title, int isComplete, String date,
       String comments, String description, String tags) async {
-     await _taskRepository.createTask(title, isComplete, date, comments, description, tags);
-  } 
+    await _taskRepository.createTask(
+        title, isComplete, date, comments, description, tags);
+  }
 }
 
 class DeleteTaskUseCase {
@@ -34,6 +35,17 @@ class DeleteTaskUseCase {
   DeleteTaskUseCase(this._taskRepository);
 
   Future<void> createTask(int id) async {
-     await _taskRepository.deleteTask(id);
-  } 
+    await _taskRepository.deleteTask(id);
+  }
+}
+
+class UpdateTaskUseCase {
+  final TaskRepository _taskRepository;
+  UpdateTaskUseCase(this._taskRepository);
+
+  Future<void> updateTask(int id, String title, int isComplete, String date,
+      String comments, String description, String tags) async {
+    await _taskRepository.updateTask(
+        id, title, isComplete, date, comments, description, tags);
+  }
 }
