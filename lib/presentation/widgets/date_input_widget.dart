@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class DateInputField extends StatefulWidget {
   final String labelText;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   const DateInputField({
     super.key,
     required this.labelText,
     required this.controller,
+    this.validator,
   });
 
   @override
@@ -38,6 +40,7 @@ class _DateInputFieldState extends State<DateInputField> {
                 color: Color(0xFFEDEDED),
                 borderRadius: BorderRadius.all(Radius.circular(5))),
             child: TextFormField(
+              validator: widget.validator,
               controller: widget.controller,
               readOnly: true,
               decoration: const InputDecoration(

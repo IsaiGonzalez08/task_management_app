@@ -5,6 +5,7 @@ import 'package:task_management_app/presentation/providers/task_provider.dart';
 import 'package:task_management_app/presentation/widgets/button_widget.dart';
 import 'package:task_management_app/presentation/widgets/date_input_widget.dart';
 import 'package:task_management_app/presentation/widgets/drop_down_menu_widget.dart';
+import 'package:task_management_app/presentation/widgets/tapbar_widget.dart';
 import 'package:task_management_app/presentation/widgets/textfield_widget.dart';
 
 class MyAddTaskScreen extends StatefulWidget {
@@ -41,10 +42,17 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
         description,
         tags,
       );
+      navigateHomeScreen();
     } else {
       print('El formulario no es válido');
     }
   }
+
+  void navigateHomeScreen() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const MyTapBar()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
