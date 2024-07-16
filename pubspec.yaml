@@ -65,6 +65,7 @@ flutter:
     - assets/img/add.png
     - assets/img/active_add.png
     - assets/img/Settings.png
+    - assets/img/check_mark.png
     - assets/.env
 
   # The following line ensures that the Material Icons font is

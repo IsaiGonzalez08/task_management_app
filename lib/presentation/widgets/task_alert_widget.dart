@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/presentation/providers/task_provider.dart';
 import 'package:task_management_app/presentation/screens/update_task_screen.dart';
+import 'package:task_management_app/presentation/widgets/alert_confirm.dart';
 import 'package:task_management_app/presentation/widgets/button_widget.dart';
 import 'package:task_management_app/presentation/widgets/tapbar_widget.dart';
 
@@ -36,9 +37,15 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
         context, MaterialPageRoute(builder: (context) => const MyTapBar()));
   }
 
-  void deleteTask() async {
-    await Provider.of<TaskProvider>(context, listen: false).deleteTask(taskId);
-    navigateTapBar();
+  void _showConfirmDialog(int taskId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MyAlertConfirmDelete(
+          taskId: taskId,
+        );
+      },
+    );
   }
 
   void navigateUpdateTaskScreen(int taskId) {
@@ -113,7 +120,7 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
                   ),
                   IconButton(
                     onPressed: () {
-                      deleteTask();
+                      _showConfirmDialog(taskId);
                     },
                     color: const Color(0xFFFFFFFF),
                     style: const ButtonStyle(
@@ -140,7 +147,7 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
             height: 5,
           ),
           Consumer<TaskProvider>(builder: (_, controller, __) {
-            if (controller.loading) {
+            if (controller.loadingInfoTask) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

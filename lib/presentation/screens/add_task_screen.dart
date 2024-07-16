@@ -25,15 +25,15 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
   final TextEditingController tagsController = TextEditingController();
 
   Future<void> _createTask() async {
-    final String title = titleController.text;
-    final String isComplete = startValue!;
-    final String date = dateController.text;
-    final String comments = commentsController.text;
-    final String description = descriptionController.text;
-    final String tags = tagsController.text;
-    DateTime parsedDate = DateFormat('dd/MM/yyyy').parse(date);
-    String formattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
     if (_formKey.currentState!.validate()) {
+      final String title = titleController.text;
+      final String isComplete = startValue!;
+      final String date = dateController.text;
+      final String comments = commentsController.text;
+      final String description = descriptionController.text;
+      final String tags = tagsController.text;
+      DateTime parsedDate = DateFormat('dd/MM/yyyy').parse(date);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
       await Provider.of<TaskProvider>(context, listen: false).createTask(
         title,
         int.parse(isComplete),
@@ -51,6 +51,13 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
   void navigateHomeScreen() {
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const MyTapBar()));
+  }
+
+  String? _validateNotEmpty(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Este campo es obligatorio';
+    }
+    return null;
   }
 
   @override
@@ -90,6 +97,7 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
                   controllerTextField: titleController,
                   text: "Titulo",
                   textLabel: "Titulo de la actividad*",
+                  validator: _validateNotEmpty,
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -110,6 +118,7 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
                       child: DateInputField(
                         labelText: "Seleccionar fecha",
                         controller: dateController,
+                        validator: _validateNotEmpty,
                       ),
                     ),
                   ],
@@ -121,6 +130,7 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
                   controllerTextField: commentsController,
                   text: "Comentarios",
                   textLabel: "Comentarios",
+                  validator: _validateNotEmpty,
                 ),
                 const SizedBox(height: 10),
                 MyTextFieldWidget(
@@ -129,6 +139,7 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
                   controllerTextField: descriptionController,
                   text: "Descripción",
                   textLabel: "Descripción",
+                  validator: _validateNotEmpty,
                 ),
                 const SizedBox(height: 10),
                 MyTextFieldWidget(
@@ -137,6 +148,7 @@ class _MyAddTaskScreenState extends State<MyAddTaskScreen> {
                   controllerTextField: tagsController,
                   text: "Tags",
                   textLabel: "Tags",
+                  validator: _validateNotEmpty,
                 ),
                 const SizedBox(height: 20),
                 CustomButton(
