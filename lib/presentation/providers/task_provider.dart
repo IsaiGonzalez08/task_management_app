@@ -9,14 +9,37 @@ class TaskProvider extends ChangeNotifier {
   List<TaskModel> _tasks = [];
   List<TaskModel> get tasks => _tasks;
 
+  TaskModel _task = TaskModel(
+      id: 0,
+      title: '',
+      isCompleted: 0,
+      date: '',
+      comments: '',
+      createDate: '',
+      description: '',
+      tags: '',
+      updateDate: '');
+  TaskModel get task => _task;
+
   bool _loading = false;
   bool get loading => _loading;
 
-  Future<void> getAllBusStops() async {
+  bool _loadingInfoTask = false;
+  bool get loadingInfoTask => _loadingInfoTask;
+
+  Future<void> getAllTasks() async {
     _loading = true;
     List<TaskModel> tasks = await _taskRepository.getAllTasks();
     _tasks = tasks;
     _loading = false;
+    notifyListeners();
+  }
+
+  Future<void> getTaskById(int id) async {
+    _loadingInfoTask = true;
+    TaskModel task = await _taskRepository.getTaskById(id);
+    _task = task;
+    _loadingInfoTask = false;
     notifyListeners();
   }
 }

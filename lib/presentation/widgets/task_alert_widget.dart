@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:task_management_app/presentation/providers/task_provider.dart';
 import 'package:task_management_app/presentation/widgets/button_widget.dart';
 
 class TaskAlertWidget extends StatefulWidget {
@@ -112,170 +114,189 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
           const SizedBox(
             height: 5,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Comentarios',
-                style: TextStyle(
-                    color: Color(0xFF01142B),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-              Container(
-                width: double.infinity,
-                height: 100,
-                decoration: const BoxDecoration(
-                    color: Color(0xFFF5F5F5),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Hola',
-                    style: TextStyle(
-                        color: Color(0xFF01142B), fontWeight: FontWeight.w500),
-                  ),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Descripción',
-                style: TextStyle(
-                    color: Color(0xFF01142B),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-              Container(
-                width: double.infinity,
-                height: 100,
-                decoration: const BoxDecoration(
-                    color: Color(0xFFF5F5F5),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Hola',
-                    style: TextStyle(
-                        color: Color(0xFF01142B), fontWeight: FontWeight.w500),
-                  ),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Tags',
-                style: TextStyle(
-                    color: Color(0xFF01142B),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600),
-              ),
-              Container(
-                width: double.infinity,
-                height: 100,
-                decoration: const BoxDecoration(
-                    color: Color(0xFFF5F5F5),
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Hola',
-                    style: TextStyle(
-                        color: Color(0xFF01142B), fontWeight: FontWeight.w500),
-                  ),
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
+          Consumer<TaskProvider>(builder: (_, controller, __) {
+            if (controller.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              final task = controller.task;
+              return Column(
                 children: [
-                  Text(
-                    'F. de creación:',
-                    style: TextStyle(
-                        color: Color(0xFF01142B),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Comentarios',
+                        style: TextStyle(
+                            color: Color(0xFF01142B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFF5F5F5),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            task.comments ?? '',
+                            style: const TextStyle(
+                                color: Color(0xFF01142B),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  Text('data',
-                      style: TextStyle(
-                          color: Color(0xFF8D8D8D),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500))
-                ],
-              ),
-              Column(
-                children: [
-                  Text('F. de actualización:',
-                      style: TextStyle(
-                          color: Color(0xFF01142B),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600)),
-                  Text(
-                    'data',
-                    style: TextStyle(
-                        color: Color(0xFF8D8D8D),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Descripción',
+                        style: TextStyle(
+                            color: Color(0xFF01142B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFF5F5F5),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            task.description ?? '',
+                            style: const TextStyle(
+                                color: Color(0xFF01142B),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Tags',
+                        style: TextStyle(
+                            color: Color(0xFF01142B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFF5F5F5),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            task.tags ?? '',
+                            style: const TextStyle(
+                                color: Color(0xFF01142B),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          const Text(
+                            'F. de creación:',
+                            style: TextStyle(
+                                color: Color(0xFF01142B),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          Text(task.createDate ?? '',
+                              style: const TextStyle(
+                                  color: Color(0xFF8D8D8D),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500))
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text('F. de actualización:',
+                              style: TextStyle(
+                                  color: Color(0xFF01142B),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600)),
+                          Text(
+                            task.updateDate ?? '',
+                            style: const TextStyle(
+                                color: Color(0xFF8D8D8D),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Column(
+                    children: [
+                      const Text('Completado:',
+                          style: TextStyle(
+                              color: Color(0xFF01142B),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600)),
+                      Text(
+                        '${task.isCompleted}',
+                        style: const TextStyle(
+                            color: Color(0xFF8D8D8D),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.2),
+                    child: CustomButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        textButton: 'Salir',
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        height: 35,
                         fontSize: 14,
-                        fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFF8D8D8D),
+                        colorText: const Color(0xFFFFFFFF)),
                   )
                 ],
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Column(
-            children: [
-              Text('Completado:',
-                  style: TextStyle(
-                      color: Color(0xFF01142B),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600)),
-              Text(
-                'data',
-                style: TextStyle(
-                    color: Color(0xFF8D8D8D),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.2),
-            child: CustomButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                textButton: 'Salir',
-                width: MediaQuery.of(context).size.width * 0.25,
-                height: 35,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: const Color(0xFF8D8D8D),
-                colorText: const Color(0xFFFFFFFF)),
-          )
+              );
+            }
+          })
         ],
       ),
     );

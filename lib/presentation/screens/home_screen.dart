@@ -13,7 +13,8 @@ class MyHomeScreen extends StatefulWidget {
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
-  void _showConfirmDialog(String taskTitle, String taskDate, int taskId) {
+  void _showTaskDialog(String taskTitle, String taskDate, int taskId) {
+    Provider.of<TaskProvider>(context, listen: false).getTaskById(taskId);
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -28,7 +29,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<TaskProvider>(context, listen: false).getAllBusStops();
+    Provider.of<TaskProvider>(context, listen: false).getAllTasks();
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +81,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     final task = tasks[index];
                     return MyCardTaskWidget(
                       onTap: () {
-                        _showConfirmDialog(task.title, task.date, task.id);
+                        _showTaskDialog(task.title, task.date, task.id);
                       },
                       title: task.title,
                       date: task.date,

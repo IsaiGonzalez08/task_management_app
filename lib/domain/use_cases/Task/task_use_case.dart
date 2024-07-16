@@ -9,3 +9,12 @@ class GetAllTasksUseCase {
      return await _taskRepository.getAllTasks();
   } 
 }
+
+class GetTaskByIdUseCase {
+  final TaskRepository _taskRepository;
+  GetTaskByIdUseCase(this._taskRepository);
+
+  Future<TaskModel> getTaskById(int id) async {
+     return await _taskRepository.getTaskById(id);
+  } 
+}

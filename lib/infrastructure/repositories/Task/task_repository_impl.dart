@@ -15,7 +15,6 @@ class TaskRepositoryImpl implements TaskRepository {
         'token': token,
       });
 
-
       final response = await http.get(
         uri,
         headers: {
@@ -28,6 +27,39 @@ class TaskRepositoryImpl implements TaskRepository {
         final List<TaskModel> tasks =
             decodedResponse.map((json) => TaskModel.fromJson(json)).toList();
         return tasks;
+      } else {
+        throw Exception('Error con el servidor: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('Error con el servidor: $error');
+    }
+  }
+
+  @override
+  Future<TaskModel> getTaskById(int id) async {
+    try {
+      final String token = dotenv.env['API_TOKEN'] ?? '';
+      final String apiUrl = dotenv.env['API_URL'] ?? '';
+
+      final Uri uri = Uri.parse('$apiUrl/tasks/$id').replace(queryParameters: {
+        'token': token,
+      });
+
+      final response = await http.get(
+        uri,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> decodedResponse = json.decode(response.body);
+        if (decodedResponse.isEmpty) {
+          throw Exception(
+              'No se encontró ninguna tarea con el ID proporcionado');
+        }
+        final TaskModel task = TaskModel.fromJson(decodedResponse.first);
+        return task;
       } else {
         throw Exception('Error con el servidor: ${response.statusCode}');
       }
