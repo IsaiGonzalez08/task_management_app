@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:task_management_app/presentation/providers/task_provider.dart';
 import 'package:task_management_app/presentation/screens/update_task_screen.dart';
 import 'package:task_management_app/presentation/widgets/alert_confirm.dart';
+import 'package:task_management_app/presentation/widgets/alert_dialog.dart';
 import 'package:task_management_app/presentation/widgets/button_widget.dart';
 import 'package:task_management_app/presentation/widgets/tapbar_widget.dart';
 
@@ -44,6 +45,15 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
         return MyAlertConfirmDelete(
           taskId: taskId,
         );
+      },
+    );
+  }
+
+  void _showAlertDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const MyAlertDialog();
       },
     );
   }
@@ -165,20 +175,25 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 100,
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFF5F5F5),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            task.comments ?? '',
-                            style: const TextStyle(
-                                color: Color(0xFF01142B),
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: () {
+                          _showAlertDialog();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 100,
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFF5F5F5),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              task.comments ?? '',
+                              style: const TextStyle(
+                                  color: Color(0xFF8D8D8D),
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       )
@@ -197,20 +212,25 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 100,
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFF5F5F5),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            task.description ?? '',
-                            style: const TextStyle(
-                                color: Color(0xFF01142B),
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: () {
+                          _showAlertDialog();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 100,
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFF5F5F5),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              task.description ?? '',
+                              style: const TextStyle(
+                                  color: Color(0xFF8D8D8D),
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       )
@@ -229,20 +249,25 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 100,
-                        decoration: const BoxDecoration(
-                            color: Color(0xFFF5F5F5),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            task.tags ?? '',
-                            style: const TextStyle(
-                                color: Color(0xFF01142B),
-                                fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: () {
+                          _showAlertDialog();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 100,
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFF5F5F5),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              task.tags ?? '',
+                              style: const TextStyle(
+                                  color: Color(0xFF8D8D8D),
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ),
                       )

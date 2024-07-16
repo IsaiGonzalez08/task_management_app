@@ -5,12 +5,13 @@ import 'package:task_management_app/domain/models/Task/repository/task_repositor
 import 'package:task_management_app/domain/models/Task/task.dart';
 
 class TaskRepositoryImpl implements TaskRepository {
+
+  final String token = dotenv.env['API_TOKEN'] ?? '';
+  final String apiUrl = dotenv.env['API_URL'] ?? '';
+
   @override
   Future<List<TaskModel>> getAllTasks() async {
     try {
-      final String token = dotenv.env['API_TOKEN'] ?? '';
-      final String apiUrl = dotenv.env['API_URL'] ?? '';
-
       final Uri uri = Uri.parse('$apiUrl/tasks').replace(queryParameters: {
         'token': token,
       });
@@ -21,7 +22,6 @@ class TaskRepositoryImpl implements TaskRepository {
           'Authorization': 'Bearer $token',
         },
       );
-
       if (response.statusCode == 200) {
         final List<dynamic> decodedResponse = json.decode(response.body);
         final List<TaskModel> tasks =
@@ -38,20 +38,15 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   Future<TaskModel> getTaskById(int id) async {
     try {
-      final String token = dotenv.env['API_TOKEN'] ?? '';
-      final String apiUrl = dotenv.env['API_URL'] ?? '';
-
       final Uri uri = Uri.parse('$apiUrl/tasks/$id').replace(queryParameters: {
         'token': token,
       });
-
       final response = await http.get(
         uri,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
-
       if (response.statusCode == 200) {
         final List<dynamic> decodedResponse = json.decode(response.body);
         if (decodedResponse.isEmpty) {
@@ -72,11 +67,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<void> createTask(String title, int isComplete, String date,
       String comments, String description, String tags) async {
     try {
-      final String token = dotenv.env['API_TOKEN'] ?? '';
-      final String apiUrl = dotenv.env['API_URL'] ?? '';
-
       final Uri uri = Uri.parse('$apiUrl/tasks');
-
       final Map<String, dynamic> params = {
         'token': token,
         'title': title,
@@ -86,7 +77,6 @@ class TaskRepositoryImpl implements TaskRepository {
         'description': description,
         'tags': tags,
       };
-
       final response = await http.post(
         uri.replace(queryParameters: params),
         headers: {
@@ -94,7 +84,6 @@ class TaskRepositoryImpl implements TaskRepository {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       );
-
       if (response.statusCode == 201) {
         print('Tarea creada con éxito');
       } else {
@@ -108,8 +97,6 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   Future<void> deleteTask(int id) async {
     try {
-      final String token = dotenv.env['API_TOKEN'] ?? '';
-      final String apiUrl = dotenv.env['API_URL'] ?? '';
       final Uri uri = Uri.parse('$apiUrl/tasks/$id');
       final Map<String, dynamic> params = {
         'token': token,
@@ -136,10 +123,7 @@ class TaskRepositoryImpl implements TaskRepository {
   Future<void> updateTask(int id, String title, int isComplete, String date,
       String comments, String description, String tags) async {
     try {
-      final String token = dotenv.env['API_TOKEN'] ?? '';
-      final String apiUrl = dotenv.env['API_URL'] ?? '';
       final Uri uri = Uri.parse('$apiUrl/tasks/$id');
-
       final Map<String, dynamic> params = {
         'token': token,
         'title': title,
@@ -149,8 +133,6 @@ class TaskRepositoryImpl implements TaskRepository {
         'description': description,
         'tags': tags,
       };
-
-
       final response = await http.put(
         uri.replace(queryParameters: params),
         headers: {
@@ -158,7 +140,6 @@ class TaskRepositoryImpl implements TaskRepository {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       );
-
       if (response.statusCode == 201) {
         print('Tarea actualizada con éxito');
       } else {
