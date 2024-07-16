@@ -6,10 +6,7 @@ Task management app es una aplicación desarrollada en flutter que sirve para la
 - Ver información a detalle de cada tarea.  
 - Crear tareas nuevas.  
 - Actualizar tareas creadas anteriormente.  
-- Eliminar tareas.  
-
-## Getting Started
-
+- Eliminar tareas.
 
 ### Uso de herramientas
 Algunas de las tecnologías utilizadas para el desarrollo de la aplicación fueron:
@@ -18,6 +15,8 @@ Algunas de las tecnologías utilizadas para el desarrollo de la aplicación fuer
 - [http] - Gestión de peticiones a la API.    
 - [flutter_dotenv] - Gestión y protección de credenciales.    
 - [intl] - Para la conversión de formatos.    
+
+## Getting Started
 
 ### Guía de instalación para el proyecto
   
