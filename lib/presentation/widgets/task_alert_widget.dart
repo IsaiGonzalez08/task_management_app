@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_management_app/presentation/providers/task_provider.dart';
 import 'package:task_management_app/presentation/widgets/button_widget.dart';
+import 'package:task_management_app/presentation/widgets/tapbar_widget.dart';
 
 class TaskAlertWidget extends StatefulWidget {
   final String taskTitle, taskDate;
@@ -27,6 +28,16 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
     taskDate = widget.taskDate;
     taskId = widget.taskId;
     super.initState();
+  }
+
+  void navigateTapBar() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const MyTapBar()));
+  }
+
+  void deleteTask() async {
+    await Provider.of<TaskProvider>(context, listen: false).deleteTask(taskId);
+    navigateTapBar();
   }
 
   @override
@@ -89,7 +100,9 @@ class _TaskAlertWidgetState extends State<TaskAlertWidget> {
                     iconSize: 20,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      deleteTask();
+                    },
                     color: const Color(0xFFFFFFFF),
                     style: const ButtonStyle(
                         shape: WidgetStatePropertyAll(ContinuousRectangleBorder(

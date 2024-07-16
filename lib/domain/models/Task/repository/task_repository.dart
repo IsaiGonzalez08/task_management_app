@@ -5,4 +5,5 @@ abstract class TaskRepository {
   Future<TaskModel> getTaskById(int id);
   Future<void> createTask(String title, int isComplete, String date,
       String comments, String description, String tags);
+  Future<void> deleteTask(int id);
 }

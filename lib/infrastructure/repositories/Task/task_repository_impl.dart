@@ -104,4 +104,31 @@ class TaskRepositoryImpl implements TaskRepository {
       throw Exception('Error con el servidor: $error');
     }
   }
+
+  @override
+  Future<void> deleteTask(int id) async {
+    try {
+      final String token = dotenv.env['API_TOKEN'] ?? '';
+      final String apiUrl = dotenv.env['API_URL'] ?? '';
+      final Uri uri = Uri.parse('$apiUrl/tasks/$id');
+      final Map<String, dynamic> params = {
+        'token': token,
+        'task_id': id.toString(),
+      };
+      final response = await http.delete(
+        uri.replace(queryParameters: params),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      );
+      if (response.statusCode == 201) {
+        print('Tarea eliminada con éxito');
+      } else {
+        throw Exception('Error con el servidor: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('Error con el servidor: $error');
+    }
+  }
 }

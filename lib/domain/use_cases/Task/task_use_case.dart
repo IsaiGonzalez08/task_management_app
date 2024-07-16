@@ -28,3 +28,12 @@ class CreateTaskUseCase {
      await _taskRepository.createTask(title, isComplete, date, comments, description, tags);
   } 
 }
+
+class DeleteTaskUseCase {
+  final TaskRepository _taskRepository;
+  DeleteTaskUseCase(this._taskRepository);
+
+  Future<void> createTask(int id) async {
+     await _taskRepository.deleteTask(id);
+  } 
+}

@@ -48,4 +48,8 @@ class TaskProvider extends ChangeNotifier {
     await _taskRepository.createTask(
         title, isComplete, date, comments, description, tags);
   }
+
+  Future<void> deleteTask(int id) async {
+    await _taskRepository.deleteTask(id);
+  }
 }
