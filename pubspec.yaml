@@ -40,6 +40,7 @@ dependencies:
   provider: ^6.1.2
   flutter_svg: ^2.0.10+1
   textfield_datepicker: ^0.2.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,7 @@ flutter:
     - assets/img/active_home.svg
     - assets/img/add.png
     - assets/img/active_add.png
+    - assets/img/Settings.png
     - assets/.env
 
   # The following line ensures that the Material Icons font is

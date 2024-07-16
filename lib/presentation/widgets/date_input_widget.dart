@@ -55,7 +55,6 @@ class _DateInputFieldState extends State<DateInputField> {
                   initialDate: DateTime.now(),
                   firstDate: DateTime.now(),
                   lastDate: DateTime(2101),
-                  locale: const Locale('es', 'ES'), // Calendario en español
                 );
                 if (pickedDate != null) {
                   setState(() {

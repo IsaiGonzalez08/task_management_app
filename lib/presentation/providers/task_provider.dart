@@ -42,4 +42,10 @@ class TaskProvider extends ChangeNotifier {
     _loadingInfoTask = false;
     notifyListeners();
   }
+
+  Future<void> createTask(String title, int isComplete, String date,
+      String comments, String description, String tags) async {
+    await _taskRepository.createTask(
+        title, isComplete, date, comments, description, tags);
+  }
 }

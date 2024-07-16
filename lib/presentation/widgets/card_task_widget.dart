@@ -11,8 +11,6 @@ class MyCardTaskWidget extends StatelessWidget {
   final String date;
   final int isCompleted;
   final void Function()? onTap;
-  
-  
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +41,7 @@ class MyCardTaskWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width *
-                            0.4,
+                        width: MediaQuery.of(context).size.width * 0.4,
                         child: Text(
                           title,
                           style: const TextStyle(
@@ -83,7 +80,8 @@ class MyCardTaskWidget extends StatelessWidget {
                         color: Color(0xFF8D8D8D),
                         fontSize: 14,
                         fontWeight: FontWeight.w400),
-                  )
+                  ),
+                  Image.asset('assets/img/Settings.png')
                 ],
               )
             ],

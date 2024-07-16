@@ -67,4 +67,41 @@ class TaskRepositoryImpl implements TaskRepository {
       throw Exception('Error con el servidor: $error');
     }
   }
+
+  @override
+  Future<void> createTask(String title, int isComplete, String date,
+      String comments, String description, String tags) async {
+    try {
+      final String token = dotenv.env['API_TOKEN'] ?? '';
+      final String apiUrl = dotenv.env['API_URL'] ?? '';
+
+      final Uri uri = Uri.parse('$apiUrl/tasks');
+
+      final Map<String, dynamic> params = {
+        'token': token,
+        'title': title,
+        'is_completed': isComplete.toString(),
+        'due_date': date,
+        'comments': comments,
+        'description': description,
+        'tags': tags,
+      };
+
+      final response = await http.post(
+        uri.replace(queryParameters: params),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      );
+
+      if (response.statusCode == 201) {
+        print('Tarea creada con éxito');
+      } else {
+        throw Exception('Error con el servidor: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw Exception('Error con el servidor: $error');
+    }
+  }
 }
