@@ -3,9 +3,28 @@ import 'package:provider/provider.dart';
 import 'package:task_management_app/domain/models/Task/task.dart';
 import 'package:task_management_app/presentation/providers/task_provider.dart';
 import 'package:task_management_app/presentation/widgets/card_task_widget.dart';
+import 'package:task_management_app/presentation/widgets/task_alert_widget.dart';
 
-class MyHomeScreen extends StatelessWidget {
+class MyHomeScreen extends StatefulWidget {
   const MyHomeScreen({super.key});
+
+  @override
+  State<MyHomeScreen> createState() => _MyHomeScreenState();
+}
+
+class _MyHomeScreenState extends State<MyHomeScreen> {
+  void _showConfirmDialog(String taskTitle, String taskDate, int taskId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return TaskAlertWidget(
+          taskTitle: taskTitle,
+          taskDate: taskDate,
+          taskId: taskId,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +79,9 @@ class MyHomeScreen extends StatelessWidget {
                   itemBuilder: (_, index) {
                     final task = tasks[index];
                     return MyCardTaskWidget(
+                      onTap: () {
+                        _showConfirmDialog(task.title, task.date, task.id);
+                      },
                       title: task.title,
                       date: task.date,
                       isCompleted: task.isCompleted,
