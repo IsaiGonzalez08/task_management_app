@@ -1,6 +1,7 @@
 # task_management_app
 
-A new Flutter project.
+Task Management App es una aplición desarrollada en flutter, la principal funcinalidad de esta app es la gestión de tareas, en esta app es pueden crear tareas,
+actualizar tareas, eliminar tareas y poder ver todas las tareas creadas en una lista.
 
 ## Getting Started
 
